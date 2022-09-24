@@ -1,4 +1,4 @@
-# I.CMD.you.to.develop.fast.in.Azure
+# I CMD you to develop fast in Azure
 
 This is the @noopman coding setup for Azure coding. Enjoy, reuse, share! ;~)
 
