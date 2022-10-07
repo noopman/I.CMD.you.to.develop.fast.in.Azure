@@ -177,8 +177,28 @@ Open the VS Code settings file and add the following:
 }
 #>
 
+<# VS Code in full code window.
+
+When you work in VS code use this shortcut to maximize the code window:
+
+ctrl+k, z
+
+Toggle ternimal with:
+
+ctrl+j
+
+Toggle file window with:
+
+ctrl+b
+
+Open the command palette with:
+
+ctrl+shift+p
+
+#>
+
 ######################
 # The repo where you can get it all! Please enjoy, reuse, and share! ;~)
 explorer https://github.com/noopman/I.CMD.you.to.develop.fast.in.Azure
 
-# Thanks and I hope this is useful to you! /noopman
+# Thanks for reaching this far. I hope this is useful to you! /noopman
