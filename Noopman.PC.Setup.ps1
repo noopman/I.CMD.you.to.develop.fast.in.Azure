@@ -36,11 +36,41 @@ New-Item -ItemType Directory -Path 'c:\temp'
 Invoke-WebRequest -Uri 'https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user' -OutFile 'c:\temp\vscode.exe'
 c:\temp\vscode.exe
 
+<# Change an incorrect default in VS Code.
+
+When you execute code from a script file in VS Code
+the default behaviour is to focus on the command prompt.
+This is quite annoying when you want to use F8 to execute a partial script.
+If you have your cursor on a given line and hit F8 VS Code PowerShell extension will execute that line.
+Try below by putting your cursor on the following line and hitting the F8 button:
+#>
+Write-Host 'This line will execute and focus is now in the console window.'
+<#
+Standard behaviour when executing the above is that this text window loses focus.
+Focus is set to the console window.
+Now you have to click back into this file to continue developing a script.
+That's annoying.
+
+Instead configure VS Code with this setting!
+Open the VS Code settings file and add the following:
+
+"powershell.integratedConsole.focusConsoleOnExecute": false,
+
+Now execute the next line, or two lines if you like by selecting the text of the lines:
+#>
+Write-Host 'This line will execute and focus remains in this window!'
+Write-Host 'You can either execute the line where your cursor is blinking or a selection of script.'
+
 # Install Git
 https://git-scm.com/download/win
 # Download and install.
 # Reboot shell for path to be updated.
-# wt can now run git
+
+# Configure your git user email and name:
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
+# WT can now run git.
 git
 
 # Set up a location for where you develop code
@@ -49,7 +79,7 @@ Set-Location c:\code
 
 # Check to see what profile file you use.
 # Note in WT and in Code you will use the same PS7 setup.
-$PROFILE | Format-List -Force
+$profile | Format-List -Force
 
 # Create a profile file for custom settings.
 notepad $profile
@@ -136,16 +166,6 @@ Get-PoshThemes
 # You can also browse themes here:
 explorer https://ohmyposh.dev/docs/themes
 
-<# When you execute code from a code file in VS Code the default behaviour is to focus on the command prompt.
-This is quite annoying, because for each time you run a line or selection in your script using F8
-you must click back into your script file.
-Instead create a setting to NOT set focus on console window on execute
-
-Open the VS Code settings file and add the following:
-
-"powershell.integratedConsole.focusConsoleOnExecute": false,
-#>
-
 <# Here are some other "good" vs code settings I use:
 {
     "explorer.confirmDelete": false,
@@ -165,14 +185,12 @@ Open the VS Code settings file and add the following:
     "git.smartCommitChanges": "tracked",
     "editor.formatOnType": true,
     "terminal.integrated.scrollback": 25000,
-    "workbench.iconTheme": "material-icon-theme",
     "editor.linkedEditing": true,
     "editor.fontLigatures": true,
     "markdown.preview.fontSize": 16,
     "debug.console.fontSize": 16,
     "editor.fontSize": 16,
     "files.autoSave": "afterDelay",
-    "security.workspace.trust.untrustedFiles": "open",
     "azureResourceGroups.groupBy": "resourceGroup"
 }
 #>
