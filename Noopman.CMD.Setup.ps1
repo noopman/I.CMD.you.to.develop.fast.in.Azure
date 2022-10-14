@@ -29,6 +29,14 @@ winget install -e --id Microsoft.AzureCLI
 
 
 
+
+
+
+
+
+
+
+
 # I <3 PowerShell! But this session is not about that.
 Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force
 
