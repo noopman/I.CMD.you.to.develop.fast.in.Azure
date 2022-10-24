@@ -23,18 +23,31 @@ Set-Executionpolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 # In case you need to update to the latest Powershell version:
 $PSVersionTable
 winget search Microsoft.PowerShell
-# Update to latest version
+winget show Microsoft.PowerShell --versions
+# This will install with some added installer settings.
+winget install --id Microsoft.Powershell --source winget --override '/SILENT /mergetasks="addopenherecontextmenus,addrunwithpowershell7contextmenu"'
+# Clean default install
 winget install --id Microsoft.Powershell --source winget
+
 # Reboot
 
 # Default terminal:
 # In Windows Terminal (WT) settings set "Defaulte terminal Application" to WT!
 
+# Visual Studio Code
+winget show Microsoft.VisualStudioCode --versions
 # Fetch and install Visual Studio Code
+winget install Microsoft.VisualStudioCode --source winget --override '/SILENT /mergetasks="!runcode,addcontextmenufiles,addcontextmenufolders"'
+# To not start VS Code after install.
+winget install Microsoft.VisualStudioCode --source winget --override '/SILENT /mergetasks="addcontextmenufiles,addcontextmenufolders"'
+
+<# Alternatively install VS Code using the installer using these commands:
 explorer https://code.visualstudio.com
+
 New-Item -ItemType Directory -Path 'c:\temp'
 Invoke-WebRequest -Uri 'https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user' -OutFile 'c:\temp\vscode.exe'
 c:\temp\vscode.exe
+#>
 
 <# Change an incorrect default in VS Code.
 
@@ -62,6 +75,9 @@ Write-Host 'This line will execute and focus remains in this window!'
 Write-Host 'You can either execute the line where your cursor is blinking or a selection of script.'
 
 # Install Git
+winget install --id Git.Git -e --source winget
+
+# OR install Git manually
 https://git-scm.com/download/win
 # Download and install.
 # Reboot shell for path to be updated.
@@ -97,8 +113,10 @@ Set-Location c:\code\I.CMD.you.to.develop.fast.in.Azure
 # It shows a json-object graphically.
 Install-Module -Name PowerShellCookbook -AllowClobber -Force
 Import-Module -Name PowerShellCookbook
+$someObject = Get-Item .
+$someObject
 # This will show the object in a nice way which you can browse:
-Show-Object (Get-Item .)
+Show-Object $someObject
 
 # Install PSReadLine!
 pwsh.exe -noprofile -command "Install-Module PSReadLine -Force -SkipPublisherCheck -AllowPrerelease"
@@ -132,12 +150,14 @@ Install-Module -Name Terminal-Icons -AllowClobber -Force
 notepad $profile
 # Insert this + save
 Import-Module -Name Terminal-Icons
+# Reload your profile.
+. $profile
 
 # Install oh-my-posh
 explorer https://ohmyposh.dev/docs/installation/windows
 # Either
-winget install JanDeDobbeleer.OhMyPosh -s winget
-# Or
+winget install JanDeDobbeleer.OhMyPosh --source winget
+# Or download and install manually.
 Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
 # Restart terminal
 
