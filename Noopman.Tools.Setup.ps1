@@ -45,6 +45,58 @@ explorer https://cli.github.com/
 winget install GitHub.cli
 gh --version # Check it's installed
 
+<# Node Package Manager (npm)
+ # npm is the package manager for JavaScript and the world’s largest
+ # software registry. Discover packages of reusable code — and assemble
+ # them in powerful new ways.
+explorer https://www.npmjs.com/
+#>
+
+# ------------------------------------------------------------------
+
+<# Installing npm (Node Package Manager)
+
+# Sorry, but this is very roundabout. I'm not sure why it's so hard?
+
+We want to have NPM installed.
+
+1) Install cocolatey - to install nodist
+2) Install nodist - to install node
+3) Install node - to install npm
+
+# Fortunately, installing nodist also installs node and npm!
+
+#>
+
+# Install chocolatey - using the community ps1 script
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+# Install nodist - using chocolatey
+# explorer https://github.com/nullivex/nodist
+choco install nodist --confirm
+
+# Please note, logging out and in again is required for nodist to work.
+nodist -v # The version of nodist
+
+$latestNodeVersion = (nodist dist)[-1].Trim() # The latest version of node
+nodist global $latestNodeVersion # Set the latest version of node as the global version
+nodist # List the installed versions of node
+node -v
+npm -v
+nodist npm match
+node -v
+npm -v
+
+
+# In case you want to download and install node.js manually and not use
+# nodist (or chocolatey), then you can get the latest version from here:
+# https://nodejs.org/en/download/
+
+node -v # The version of node installed
+npm -v # The version of npm installed
+
+# ------------------------------------------------------------------
+
 <# Visual Studio Code
  # Visual Studio Code is a code editor redefined and optimized for
  # building and debugging modern web and cloud applications.

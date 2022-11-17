@@ -63,48 +63,28 @@ az version
 explorer https://devblogs.microsoft.com/azure-sdk/azure-developer-cli-azd-october-2022-release/
 # To Install review this (steps below):
 explorer https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd
-# 1) Git (Installed in Noopman.Tools.Setup.ps1)
-# 2) GitHub CLI
-# 3) Azure CLI (installed above)
+
+# Three (3) Requirements for azd
+
+# Installed above:
+# 1) Azure CLI
+
+# Installed in https://raw.githubusercontent.com/noopman/I.CMD.you.to.develop.fast.in.Azure/main/Noopman.Tools.Setup.ps1
+# 2) Git
+# 3) GitHub CLI
+# 4) Npm
+
+# Review the following repo for all instructions:
+explorer https://github.com/noopman/I.CMD.you.to.develop.fast.in.Azure/
 #>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-# Install git:
-explorer https://git-scm.com/
-
-git
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Install GutHub cli:
-explorer https://github.com/cli/cli
-
-winget install --id GitHub.cli
-
-gh
-
+# Verify that all these are installed
+git -v
+gh --version
+node -v # The must be 16.0.0. or higher to work with azd
+npm -v
+# If all above are installed - the commands run - then you're good to go!
 
 
 
@@ -117,10 +97,12 @@ gh
 
 
 # Install azd
-
 # Azure Developer Cli (preview)
-
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
+
+
+
+
 
 
 
@@ -141,7 +123,8 @@ powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' 
 # Get started with azd
 explorer https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/get-started
 
-azd
+azd # verify azd is installed
+azd version
 
 
 
@@ -158,10 +141,12 @@ azd
 
 
 
-
+# Create a place to work.
 $path = 'c:\code\azd.test'
+Remove-Item -Force -Recurse $path -ea 0
 New-Item -ItemType Directory $path
 Set-Location $path
+(Get-Location).Path
 
 
 
@@ -172,8 +157,15 @@ Set-Location $path
 
 
 
+
+
+
+
+
+
+# The available preview templates are:
 azd template list
-
+# The template list is sourced from the Azure Samples GitHub repo
 explorer https://github.com/orgs/Azure-Samples/repositories
 
 
@@ -191,6 +183,11 @@ explorer https://github.com/orgs/Azure-Samples/repositories
 
 
 
+# An exaple template to try:
+explorer https://github.com/Azure-Samples/todo-csharp-cosmos-sql
+
+# Deploy this template to azure - ONE LINE
+# This is the *MAGIC*!
 
 azd up --template todo-csharp-cosmos-sql
 
@@ -214,7 +211,6 @@ azd up --template todo-csharp-cosmos-sql
 
 
 
-explorer https://github.com/Azure-Samples/todo-csharp-cosmos-sql
 
 
 
@@ -233,7 +229,7 @@ explorer https://github.com/Azure-Samples/todo-csharp-cosmos-sql
 
 
 
-
+# Remove the resources created by azd up - ONE LINE
 azd down
 
 
@@ -249,6 +245,8 @@ azd down
 
 
 return
+
+# Some more examples of azd templates
 
 New-Item -itemtype directory -path .\azddemo
 Set-Location .\azddemo
