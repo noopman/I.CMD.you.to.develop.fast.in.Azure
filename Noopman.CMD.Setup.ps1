@@ -1,13 +1,19 @@
+<#
+Install the Azure Command-Line Interface (CLI), or 'az'
+And the Azure Developer CLI, or 'azd'
+#>
 
-
-
-# az # command line interface
-explorer https://learn.microsoft.com/en-us/cli/azure/
-
+<# Azure CLI
+ # The Azure CLI is a set of commands used to create and manage Azure
+ # resources. The Azure CLI is available across Azure services and is
+ # designed to get you working quickly with Azure, with an emphasis on
+ # automation.
+explorer https://learn.microsoft.com/en-us/cli/azure/what-is-azure-cli
+# How to manually install az
 explorer https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+#>
+winget install --exact --id Microsoft.AzureCLI
 
-# In case you can and want to use the Microsoft Package Manager for Windows
-winget install -e --id Microsoft.AzureCLI
 
 
 
@@ -26,6 +32,8 @@ winget install -e --id Microsoft.AzureCLI
 
 
 
+az # verify az is installed
+az version
 
 
 
@@ -37,8 +45,6 @@ winget install -e --id Microsoft.AzureCLI
 
 
 
-# I <3 PowerShell! But this session is not about that.
-Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force
 
 
 
@@ -47,41 +53,22 @@ Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force
 
 
 
+<# Azure Developer CLI
+ # The Azure Developer CLI is a set of commands used to create and
+ # manage Azure resources. The Azure Developer CLI is available across
+ # Azure services and is designed to get you working quickly with Azure,
+ # with an emphasis on automation.
 
-
-
-
-
-
-
-
-az
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# azd
-
+# Announcement blog post (preview)
 explorer https://devblogs.microsoft.com/azure-sdk/azure-developer-cli-azd-october-2022-release/
-
 # To Install review this (steps below):
 explorer https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd
+# 1) Git (Installed in Noopman.Tools.Setup.ps1)
+# 2) GitHub CLI
+# 3) Azure CLI (installed above)
+#>
+
+
 
 
 
@@ -151,6 +138,8 @@ powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' 
 
 
 
+# Get started with azd
+explorer https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/get-started
 
 azd
 
