@@ -2,7 +2,21 @@
 Install a bunch of Azure and development related tools!
 
 (Not az cli, that's a separate script. -> noopman.cmd.setup.ps1)
+
+The intent is that you execute one line at a time in this script file.
+While this is installing you will get a fast way to run each line using F8.
+For starters type the command or copy paste each one.
 #>
+
+<# winget
+ # winget is a command-line package manager for Windows 10.
+
+# If this command does not work:
+winget
+# Go here to install the "App Installer" from the Microsoft Store:
+explorer https://apps.microsoft.com/store/search/App%20Installer
+#>
+winget # verify winget is installed
 
 <# Windows Terminal
  # Windows Terminal is a new, modern, fast, efficient, powerful, and
@@ -15,6 +29,8 @@ wt # Start Windows Terminal
 #>
 winget install Microsoft.WindowsTerminal
 
+wt # Start Windows Terminal
+
 <# PowerShell 7
   # PowerShell 7 is a cross-platform (Windows, Linux, and macOS) automation
   # and configuration tool/framework that works well with your existing
@@ -25,7 +41,19 @@ winget install Microsoft.WindowsTerminal
 explorer https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-windows
 #>
 winget install Microsoft.PowerShell
-pwsh.exe # Start PowerShell 7
+# Alternatively this will install with some added installer settings.
+# winget install --id Microsoft.Powershell --source winget --override '/SILENT /mergetasks="addopenherecontextmenus,addrunwithpowershell7contextmenu"'
+
+exit # restart your terminal
+wt
+$PSVersionTable # This can be 5.1 or similar
+pwsh # Start PowerShell 7
+$PSVersionTable # This should be 7.3.0 or higher
+
+# You can instead run ps 7 prompt direct!
+# You can also have a tab in wt that is powershell 7!
+
+# From now on, make sure you run a ps 7 prompt!
 
 <# Git
  # Git is a free and open source distributed version control system
@@ -34,6 +62,66 @@ pwsh.exe # Start PowerShell 7
 explorer https://git-scm.com/
 #>
 winget install Git.Git
+
+git --version # verify git is installed
+
+# Configure your git user email and name:
+git config --global user.email "you@example.com" # replace with your email
+git config --global user.name "Your Name" # replace with your name
+
+<# OR install Git manually
+explorer https://git-scm.com/download/win
+# Download and install git!
+#>
+
+# ------------------------------------------------------------------
+
+<# Visual Studio Code
+ # Visual Studio Code is a code editor redefined and optimized for
+ # building and debugging modern web and cloud applications.
+explorer https://code.visualstudio.com/
+# Do I already have Visual Studio Code?
+code # Start Visual Studio Code
+#>
+winget install Microsoft.VisualStudioCode
+# Visual Studio Code -> Extensions
+code --install-extension AzurePolicy.azurepolicyextension
+code --install-extension ms-azuretools.vscode-azureresourcegroups
+code --install-extension ms-azuretools.vscode-azurestorage
+code --install-extension ms-azuretools.vscode-azurevirtualmachines
+code --install-extension ms-azuretools.vscode-bicep
+code --install-extension ms-azuretools.vscode-docker
+code --install-extension ms-dotnettools.vscode-dotnet-runtime
+code --install-extension ms-vscode-remote.remote-containers
+code --install-extension ms-vscode-remote.remote-ssh
+code --install-extension ms-vscode-remote.remote-ssh-edit
+code --install-extension ms-vscode-remote.remote-ssh-explorer
+code --install-extension ms-vscode-remote.remote-wsl
+code --install-extension ms-vscode-remote.vscode-remote-extensionpack
+code --install-extension ms-vscode.azure-account
+code --install-extension ms-vscode.azurecli
+code --install-extension ms-vscode.powershell
+code --install-extension ms-vscode.vscode-node-azure-pack
+code --install-extension ms-vsliveshare.vsliveshare
+code --install-extension ms-vsonline.vsonline
+code --install-extension msazurermtools.azurerm-vscode-tools
+
+# Now that you have git you can clone my setup repo 
+# and continue using this setup from that file!
+
+# Fetch this script to your machine
+$codeDir = 'c:\code'
+New-Item -ItemType Directory -Path $codeDir
+Set-Location $codeDir
+$repoName = 'I.CMD.you.to.develop.fast.in.Azure'
+git clone "https://github.com/noopman/$repoName.git"
+Set-Location "$codeDir\$repoName"
+
+code . # Open this folder in VS Code
+
+code -g -r .\Noopman.Tools.Setup.ps1:124
+
+# Let's continue here! ;~)
 
 <# GitHub CLI
  # GitHub CLI is a command line tool for GitHub.
@@ -95,37 +183,7 @@ npm -v
 node -v # The version of node installed
 npm -v # The version of npm installed
 
-# ------------------------------------------------------------------
 
-<# Visual Studio Code
- # Visual Studio Code is a code editor redefined and optimized for
- # building and debugging modern web and cloud applications.
-explorer https://code.visualstudio.com/
-# Do I already have Visual Studio Code?
-code # Start Visual Studio Code
-#>
-winget install Microsoft.VisualStudioCode
-# Visual Studio Code -> Extensions
-code --install-extension AzurePolicy.azurepolicyextension
-code --install-extension ms-azuretools.vscode-azureresourcegroups
-code --install-extension ms-azuretools.vscode-azurestorage
-code --install-extension ms-azuretools.vscode-azurevirtualmachines
-code --install-extension ms-azuretools.vscode-bicep
-code --install-extension ms-azuretools.vscode-docker
-code --install-extension ms-dotnettools.vscode-dotnet-runtime
-code --install-extension ms-vscode-remote.remote-containers
-code --install-extension ms-vscode-remote.remote-ssh
-code --install-extension ms-vscode-remote.remote-ssh-edit
-code --install-extension ms-vscode-remote.remote-ssh-explorer
-code --install-extension ms-vscode-remote.remote-wsl
-code --install-extension ms-vscode-remote.vscode-remote-extensionpack
-code --install-extension ms-vscode.azure-account
-code --install-extension ms-vscode.azurecli
-code --install-extension ms-vscode.powershell
-code --install-extension ms-vscode.vscode-node-azure-pack
-code --install-extension ms-vsliveshare.vsliveshare
-code --install-extension ms-vsonline.vsonline
-code --install-extension msazurermtools.azurerm-vscode-tools
 
 <# Microsoft Azure Storage Explorer
  # Standalone app that makes it easy to work with Azure Storage

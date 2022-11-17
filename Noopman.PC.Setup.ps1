@@ -20,17 +20,6 @@ From this very blank slate I in stall below:
 # Ensure I can install remote modules.
 Set-Executionpolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
-# In case you need to update to the latest Powershell version:
-$PSVersionTable
-winget search Microsoft.PowerShell
-winget show Microsoft.PowerShell --versions
-# This will install with some added installer settings.
-winget install --id Microsoft.Powershell --source winget --override '/SILENT /mergetasks="addopenherecontextmenus,addrunwithpowershell7contextmenu"'
-# Clean default install
-winget install --id Microsoft.Powershell --source winget
-
-# Reboot
-
 # Default terminal:
 # In Windows Terminal (WT) settings set "Defaulte terminal Application" to WT!
 
@@ -74,17 +63,6 @@ Now execute the next line, or two lines if you like by selecting the text of the
 Write-Host 'This line will execute and focus remains in this window!'
 Write-Host 'You can either execute the line where your cursor is blinking or a selection of script.'
 
-# Install Git
-winget install --id Git.Git -e --source winget
-
-# OR install Git manually
-https://git-scm.com/download/win
-# Download and install.
-# Reboot shell for path to be updated.
-
-# Configure your git user email and name:
-git config --global user.email "you@example.com"
-git config --global user.name "Your Name"
 
 # WT can now run git.
 git
@@ -105,9 +83,13 @@ Set-Location c:\code
 . $profile
 
 # Fetch this script to your machine
-git clone https://github.com/noopman/I.CMD.you.to.develop.fast.in.Azure.git
-code c:\code\I.CMD.you.to.develop.fast.in.Azure
-Set-Location c:\code\I.CMD.you.to.develop.fast.in.Azure
+$codeDir = 'c:\code'
+New-Item -ItemType Directory -Path $codeDir
+Set-Location $codeDir
+$repoName = 'I.CMD.you.to.develop.fast.in.Azure'
+git clone "https://github.com/noopman/$repoName.git"
+Set-Location "$codeDir\$repoName"
+code .
 
 # I use one specific cmdlet from PowerShellCookbook called Show-Object.
 # It shows a json-object graphically.
