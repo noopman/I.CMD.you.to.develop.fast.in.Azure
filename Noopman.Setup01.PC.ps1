@@ -9,9 +9,15 @@ I divided the setup in three parts for logical reasons:
 3) Set up tools supporting work with scripting and development 
    with things such as Azure Storage Explorer, Azure Data Studio, etc.
 
+Note: Because installing is a bit of a chicken and egg problem,
+I install my stuff in a specific order that makes sense chronologically.
+Basically this means Git and VS Code are installed very early on.
+Then my install continues from the command line in VS Code.
+
 Prerequisites:
 * I start my PC with a clean Windows 11 installation, updated to the latest of everyhing.
-* This includes Winget, the new Windows Package Manager, but I show below how to set it up manually from the Windows Store.
+* Winget, the Windows Package Manager.
+    * In case you don't have it automatically, I show below how to set it up manually.
 
 Instructions for using my setup scripts:
 * For each row in the file below, execute it on the command line!
@@ -130,6 +136,115 @@ $profile | Format-List -Force
 # Check to see what profile file you use now:
 $profile
 
+# ------------------------------------------------------------------
+<# Visual Studio Code
+ # Visual Studio Code is a code editor redefined and optimized for
+ # building and debugging modern web and cloud applications.
+
+explorer https://code.visualstudio.com/
+
+# Do I already have Visual Studio Code?
+code # Start Visual Studio Code
+
+# Note: This is the chicken and egg situation I mentioned above.
+# Code does not need to go in this early, but it makes sense in context.
+#>
+winget install Microsoft.VisualStudioCode --source winget --override '/SILENT /mergetasks="!runcode,addcontextmenufiles,addcontextmenufolders"'
+
+<# VS Code installation options:
+
+# 1) Install VS Code manually from the site just above:
+explorer https://code.visualstudio.com/
+
+# 2) VS Code download from the command line and launch the install:
+New-Item -ItemType Directory -Path 'c:\temp'
+Invoke-WebRequest -Uri 'https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user' -OutFile 'c:\temp\vscode.exe'
+c:\temp\vscode.exe # Run this!
+#>
+
+code # verify VS Code is installed
+
+# ------------------------------------------------------------------
+<# Add som Visual Studio Code Extensions
+ # Note: I use the command line to install extensions, but you can also
+ #       install them from the Extensions tab in Visual Studio Code.
+ # You can also read about the extensions I use here:
+explorer https://marketplace.visualstudio.com/VSCode
+#>
+code --install-extension AzurePolicy.azurepolicyextension
+code --install-extension ms-azuretools.vscode-azureresourcegroups
+code --install-extension ms-azuretools.vscode-azurestorage
+code --install-extension ms-azuretools.vscode-azurevirtualmachines
+code --install-extension ms-azuretools.vscode-bicep
+code --install-extension ms-azuretools.vscode-docker
+code --install-extension ms-dotnettools.vscode-dotnet-runtime
+code --install-extension ms-vscode-remote.remote-containers
+code --install-extension ms-vscode-remote.remote-ssh
+code --install-extension ms-vscode-remote.remote-ssh-edit
+code --install-extension ms-vscode-remote.remote-ssh-explorer
+code --install-extension ms-vscode-remote.remote-wsl
+code --install-extension ms-vscode-remote.vscode-remote-extensionpack
+code --install-extension ms-vscode.azure-account
+code --install-extension ms-vscode.azurecli
+code --install-extension ms-vscode.powershell
+code --install-extension ms-vscode.vscode-node-azure-pack
+code --install-extension ms-vsliveshare.vsliveshare
+code --install-extension ms-vsonline.vsonline
+code --install-extension msazurermtools.azurerm-vscode-tools
+
+# ------------------------------------------------------------------
+<# Change an incorrect default in VS Code.
+
+The biggest problem with VS Code is that it has a "wrong" default setting.
+
+When you execute code from a script file in VS Code
+the default behaviour is to focus on the command prompt.
+
+This is quite annoying when you want to use F8 to execute a partial script.
+
+If you have your cursor on a given line and hit F8 VS Code
+PowerShell extension will execute that line.
+
+In VS Code, try below by putting your cursor on the following line and hitting the F8 button:
+#>
+Write-Host 'This line will execute and focus is now in the console window.'
+<#
+Standard behaviour when executing the above is that this text window loses focus.
+Focus is set to the console window.
+Now you have to click back into this file to continue developing a script.
+That's annoying.
+
+Instead configure VS Code with this setting!
+Open the VS Code settings file and add the following:
+
+"powershell.integratedConsole.focusConsoleOnExecute": false,
+
+Now execute the next line, or two lines if you like by selecting the text of the lines:
+#>
+Write-Host 'This line will execute and focus remains in this window!'
+Write-Host 'You can either execute the line where your cursor is blinking or a selection of script.'
+
+<# Configure WT to use the new font! in the VS Code settings file:
+"terminal.integrated.fontFamily": "CaskaydiaCove NF",
+"terminal.integrated.fontSize": 14
+#>
+
+#! Note in WT and in Code you will use the same PS7 setup.
+#! The following two results of $profile should be the same:
+wt
+$profile # run in the command line in Windows Terminal.
+code
+$profile # run on the command line in VS Code.
+
+# Fetch this script to your machine
+$codeDir = 'c:\code'
+New-Item -ItemType Directory -Path $codeDir
+Set-Location $codeDir
+$repoName = 'I.CMD.you.to.develop.fast.in.Azure'
+git clone "https://github.com/noopman/$repoName.git"
+Set-Location "$codeDir\$repoName"
+code .
+
 # --------------------------------------------------------------------------------------
 <# Now that you have git on your system, you can clone my repo with all
    setup scripts, including this one!
@@ -139,10 +254,12 @@ $repoName = 'I.CMD.you.to.develop.fast.in.Azure'
 git clone "https://github.com/noopman/$repoName.git"
 Set-Location "$codeDir\$repoName"
 
-code -g -r .\Noopman.Setup01.PC.ps1:146
+code -n . # Open the folder in VS Code.
+code -r -g .\Noopman.Setup01.PC.ps1:260 # Open the file and go to line 260.
 
 # Let's continue here! ;~)
 
+# Note: now you are in VS Code and you can execute 
 
 # --------------------------------------------------------------------------------------
 <# PSReadLine
