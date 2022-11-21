@@ -229,14 +229,21 @@ Write-Host 'You can either execute the line where your cursor is blinking or a s
 "terminal.integrated.fontSize": 14
 #>
 
-#! Note in WT and in Code you will use the same PS7 setup.
-#! The following two results of $profile should be the same:
-wt
+# --------------------------------------------------------------------------------------
+<# Ensure Windows Terminal (wt) and Visual Studio Code Teminal use the exact same PowerShell 7 profile.
+ # This is a convenience to ensure that you have the same settings in both terminals.
+ # The following two files fetched by the $profile command should be the same:
+#>
+wt # Start Windows Terminal
 $profile # run in the command line in Windows Terminal.
-code
-$profile # run on the command line in VS Code.
+code # Start Visual Studio Code
+$profile # run on the pwsh command line in VS Code.
+# Are the two terminal instances using the same profile?
 
-# Fetch this script to your machine
+# --------------------------------------------------------------------------------------
+<# Now that you have git on your system, you can clone my repo with all
+   setup scripts, including this one!
+#>
 $codeDir = 'c:\code'
 New-Item -ItemType Directory -Path $codeDir
 Set-Location $codeDir
@@ -245,14 +252,6 @@ git clone "https://github.com/noopman/$repoName.git"
 Set-Location "$codeDir\$repoName"
 code .
 
-# --------------------------------------------------------------------------------------
-<# Now that you have git on your system, you can clone my repo with all
-   setup scripts, including this one!
-#>
-
-$repoName = 'I.CMD.you.to.develop.fast.in.Azure'
-git clone "https://github.com/noopman/$repoName.git"
-Set-Location "$codeDir\$repoName"
 
 code -n . # Open the folder in VS Code.
 code -r -g .\Noopman.Setup01.PC.ps1:260 # Open the file and go to line 260.
