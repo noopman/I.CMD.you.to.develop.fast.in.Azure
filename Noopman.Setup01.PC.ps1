@@ -171,7 +171,7 @@ Set-Location "$codeDir\$repoName"
 # Open the folder in VS Code...
 code -n .
 # And then open this file to the right line:
-code -r -g .\Noopman.Setup01.PC.ps1:173
+code -r -g .\Noopman.Setup01.PC.ps1:176
 
 # Let's continue here! ;~)
 
