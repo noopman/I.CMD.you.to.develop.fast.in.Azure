@@ -1,49 +1,29 @@
-<# My work-computer setup in detail follwos. Please enjoy! /noopman
+<#
+This file sets up the base line for a new PC.
 
-I divided the setup in three parts for logical reasons:
-
-1) Set up the PC with things such as the latest version of PowerShell
-   and Windows Terminal and Git for Windows.
-2) Set up a command line environment for Azure scripting, development, 
-   and Infrastrucutre as Code (IaC), and Visual Studio Code.
-3) Set up tools supporting work with scripting and development 
-   with things such as Azure Storage Explorer, Azure Data Studio, etc.
-
-Note: Because installing is a bit of a chicken and egg problem,
-I install my stuff in a specific order that makes sense chronologically.
-Basically this means Git and VS Code are installed very early on.
-Then my install continues from the command line in VS Code.
-
-Prerequisites:
-* I start my PC with a clean Windows 11 installation, updated to the latest of everyhing.
-* Winget, the Windows Package Manager.
-    * In case you don't have it automatically, I show below how to set it up manually.
-
-Instructions for using my setup scripts:
-* For each row in the file below, execute it on the command line!
-    * That means put the cursor on the line and hit F8 (or whatever execution command is used in your case.)
-    * Alternatively copy and paste the commands on your command line.
-* As soon as PowerShell is updated, set it as default and always use it!
-* A goal is to set you up wiht a very effective and powerful command line environment.
-* I will try to call out where needed:
-    * Sometimes a command must be executed as Admin. 
-    * It happens that you need to restart your terminal session, log out and in again, or even reboot.
+Command line for scripting and development follows in another file,
+and tools in yet another file.
 #>
 
+# --------------------------------------------------------------------------------------
 # Ensure you can install remote modules.
 Set-Executionpolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Set-Executionpolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine # Admin required
 
 # --------------------------------------------------------------------------------------
 # Winget is a command-line package manager for Windows 10.
-explorer https://learn.microsoft.com/en-us/windows/package-manager/ # Read about it by executing this line!
+# Read about it by executing this line:
+explorer https://learn.microsoft.com/en-us/windows/package-manager/
 
-# If the following command does not workm either you are on Windows 10 and can install winget, or you need to upgrade your OS!
+# If the following command does not work on your system
+# either you are on Windows 10 and can install winget (maybe you need to upgrade Windows 10),
+# or you really need to upgrade your OS!
 winget
 
 # To install winget go here and choose the "App Installer" from the Microsoft Store:
 explorer https://apps.microsoft.com/store/search/App%20Installer
 
-winget # verify winget is installed
+winget # verify winget is installed - this line should execute
 
 # --------------------------------------------------------------------------------------
 <# Windows Terminal
@@ -77,7 +57,7 @@ explorer https://docs.microsoft.com/en-us/powershell/scripting/install/installin
 winget install --id Microsoft.Powershell --source winget --override '/SILENT /mergetasks="addopenherecontextmenus,addrunwithpowershell7contextmenu"'
 
 # Note: the overrides '/SILENT /mergetasks="addopenherecontextmenus,addrunwithpowershell7contextmenu"'
-#       are convenient to add the "Open PowerShell 7 here" and "Run with PowerShell 7" context menu items.
+#       is convenient to add the "Open PowerShell 7 here" and "Run with PowerShell 7" context menu items.
 
 exit # restart your terminal
 
@@ -90,7 +70,9 @@ pwsh # Start PowerShell 7 in your terminal session.
 $PSVersionTable # Now your PS version should be 7.3.0 or higher.
 
 # --------------------------------------------------------------------------------------
-<# wt configuration - choose "arrow" and "settings", or type ctrl+,!:
+<# wt configuration
+
+* In wt choose the "arrow" on the top line and "settings", or type ctrl+,
 * Default profile: 'PowerShell' (which means Power Shell 7, instead of Windows Powershell, the old version).
 * Default terminal application: Windows Terminal
 * Launch mode: I prefer maximized.
@@ -98,10 +80,9 @@ $PSVersionTable # Now your PS version should be 7.3.0 or higher.
 
 # --------------------------------------------------------------------------------------
 <# Git
- # Git is a free and open source distributed version control system
- # designed to handle everything from small to very large projects
- # with speed and efficiency.
-explorer https://git-scm.com/
+Git is a free and open source distributed version control system
+designed to handle everything from small to very large projects
+with speed and efficiency.
 #>
 git --version # check if git is installed
 
@@ -110,45 +91,54 @@ winget install Git.Git # install git
 git --version # verify git is installed
 
 # Configure your git user email and name:
-git config --global user.email "you@example.com" # replace with your email
-git config --global user.name "Your Name" # replace with your name
+git config --global user.email "you@example.com" # Note: Replace with your email!
+git config --global user.name "Your Name" # Note: Replace with your name!
 
-<# Alternatively, install Git manually:
+# Alternatively, install Git manually by downloading and installing git:
 explorer https://git-scm.com/download/win
-# Download and install git.
-#>
 
 # --------------------------------------------------------------------------------------
-# Set up a location for where you develop code
+# Set up a location for where you always keep code (IaC or otherwise).
 $codeDir = 'c:\code'
 New-Item -ItemType Directory -Path $codeDir
 Set-Location $codeDir
 
-# Create a profile file for custom settings.
+# --------------------------------------------------------------------------------------
+# PowerShell profile
+
+# Open or create a profile file for your custom settings.
 notepad $profile
-# Insert this in the file and save - your command line will always start in this location:
+
+# Insert this in the file and save.
 Set-Location $codeDir
+
 # Reload your profile.
 . $profile
 
-# There is probably multiple profile files on your computer:
+# Your command line will now always start in this location convenient location!
+
+# By the way. There is probably multiple profile files on your computer:
 $profile | Format-List -Force
 # Check to see what profile file you use now:
 $profile
 
 # ------------------------------------------------------------------
-<# Visual Studio Code
- # Visual Studio Code is a code editor redefined and optimized for
- # building and debugging modern web and cloud applications.
+<# Visual Studio Code (VS Code)
 
+Visual Studio Code is a code editor redefined and optimized for
+building and debugging modern web and cloud applications.
+
+Note: This is the chicken and egg situation I mentioned above.
+VS Code does not need to go in this early, but it makes sense in context.
+#>
+
+# Execute this command to go to the site for VS Code:
 explorer https://code.visualstudio.com/
 
-# Do I already have Visual Studio Code?
-code # Start Visual Studio Code
+# Do I already have Visual Studio Code? Test this:
+code # Should start Visual Studio Code
 
-# Note: This is the chicken and egg situation I mentioned above.
-# Code does not need to go in this early, but it makes sense in context.
-#>
+# If not then install it!
 winget install Microsoft.VisualStudioCode --source winget --override '/SILENT /mergetasks="!runcode,addcontextmenufiles,addcontextmenufolders"'
 
 <# VS Code installation options:
@@ -162,15 +152,42 @@ Invoke-WebRequest -Uri 'https://code.visualstudio.com/sha/download?build=stable&
 c:\temp\vscode.exe # Run this!
 #>
 
-code # verify VS Code is installed
+code # verify VS Code is now installed!
+
+# --------------------------------------------------------------------------------------
+<# Clone these scripts from GitHub!
+
+Now that you have git on your system, you can clone my repo
+with my setup scripts, including this one!
+#>
+Set-Location $codeDir # Go to your code directory
+
+# Clone my public GitHub repo:
+$repoName = 'I.CMD.you.to.develop.fast.in.Azure'
+git clone "https://github.com/noopman/$repoName.git"
+
+Set-Location "$codeDir\$repoName"
+
+# Open the folder in VS Code...
+code -n .
+# And then open this file to the right line:
+code -r -g .\Noopman.Setup01.PC.ps1:173
+
+# Let's continue here! ;~)
 
 # ------------------------------------------------------------------
-<# Add som Visual Studio Code Extensions
- # Note: I use the command line to install extensions, but you can also
- #       install them from the Extensions tab in Visual Studio Code.
- # You can also read about the extensions I use here:
-explorer https://marketplace.visualstudio.com/VSCode
+# Visual Studio Code Configuration time!
+
+# ------------------------------------------------------------------
+<# VS Code Extensions:
+
+Note: I use the command line to install extensions, but you can also
+install them from the Extensions tab in Visual Studio Code.
 #>
+
+# You can read about all extensions here:
+explorer https://marketplace.visualstudio.com/VSCode
+
 code --install-extension AzurePolicy.azurepolicyextension
 code --install-extension ms-azuretools.vscode-azureresourcegroups
 code --install-extension ms-azuretools.vscode-azurestorage
@@ -193,7 +210,7 @@ code --install-extension ms-vsonline.vsonline
 code --install-extension msazurermtools.azurerm-vscode-tools
 
 # ------------------------------------------------------------------
-<# Change an incorrect default in VS Code.
+<# Change an incorrect default in VS Code!
 
 The biggest problem with VS Code is that it has a "wrong" default setting.
 
@@ -239,24 +256,6 @@ $profile # run in the command line in Windows Terminal.
 code # Start Visual Studio Code
 $profile # run on the pwsh command line in VS Code.
 # Are the two terminal instances using the same profile?
-
-# --------------------------------------------------------------------------------------
-<# Now that you have git on your system, you can clone my repo with all
-   setup scripts, including this one!
-#>
-$codeDir = 'c:\code'
-New-Item -ItemType Directory -Path $codeDir
-Set-Location $codeDir
-$repoName = 'I.CMD.you.to.develop.fast.in.Azure'
-git clone "https://github.com/noopman/$repoName.git"
-Set-Location "$codeDir\$repoName"
-code .
-
-
-code -n . # Open the folder in VS Code.
-code -r -g .\Noopman.Setup01.PC.ps1:260 # Open the file and go to line 260.
-
-# Let's continue here! ;~)
 
 # Note: now you are in VS Code and you can execute 
 
