@@ -178,38 +178,6 @@ code -r -g .\Noopman.Setup01.PC.ps1:176
 # ------------------------------------------------------------------
 # Visual Studio Code Configuration time!
 
-# ------------------------------------------------------------------
-<# VS Code Extensions:
-
-Note: I use the command line to install extensions, but you can also
-install them from the Extensions tab in Visual Studio Code.
-#>
-
-# You can read about all extensions here:
-explorer https://marketplace.visualstudio.com/VSCode
-
-code --install-extension AzurePolicy.azurepolicyextension
-code --install-extension ms-azuretools.vscode-azureresourcegroups
-code --install-extension ms-azuretools.vscode-azurestorage
-code --install-extension ms-azuretools.vscode-azurevirtualmachines
-code --install-extension ms-azuretools.vscode-bicep
-code --install-extension ms-azuretools.vscode-docker
-code --install-extension ms-dotnettools.vscode-dotnet-runtime
-code --install-extension ms-vscode-remote.remote-containers
-code --install-extension ms-vscode-remote.remote-ssh
-code --install-extension ms-vscode-remote.remote-ssh-edit
-code --install-extension ms-vscode-remote.remote-ssh-explorer
-code --install-extension ms-vscode-remote.remote-wsl
-code --install-extension ms-vscode-remote.vscode-remote-extensionpack
-code --install-extension ms-vscode.azure-account
-code --install-extension ms-vscode.azurecli
-code --install-extension ms-vscode.powershell
-code --install-extension ms-vscode.vscode-node-azure-pack
-code --install-extension ms-vsliveshare.vsliveshare
-code --install-extension ms-vsonline.vsonline
-code --install-extension msazurermtools.azurerm-vscode-tools
-
-# ------------------------------------------------------------------
 <# Change an incorrect default in VS Code!
 
 The biggest problem with VS Code is that it has a "wrong" default setting.
@@ -241,10 +209,36 @@ Now execute the next line, or two lines if you like by selecting the text of the
 Write-Host 'This line will execute and focus remains in this window!'
 Write-Host 'You can either execute the line where your cursor is blinking or a selection of script.'
 
-<# Configure WT to use the new font! in the VS Code settings file:
-"terminal.integrated.fontFamily": "CaskaydiaCove NF",
-"terminal.integrated.fontSize": 14
+# ------------------------------------------------------------------
+<# VS Code Extensions:
+
+Note: I use the command line to install extensions, but you can also
+install them from the Extensions tab in Visual Studio Code.
 #>
+
+# You can read about all extensions here:
+explorer https://marketplace.visualstudio.com/VSCode
+
+code --install-extension AzurePolicy.azurepolicyextension
+code --install-extension ms-azuretools.vscode-azureresourcegroups
+code --install-extension ms-azuretools.vscode-azurestorage
+code --install-extension ms-azuretools.vscode-azurevirtualmachines
+code --install-extension ms-azuretools.vscode-bicep
+code --install-extension ms-azuretools.vscode-docker
+code --install-extension ms-dotnettools.vscode-dotnet-runtime
+code --install-extension ms-vscode-remote.remote-containers
+code --install-extension ms-vscode-remote.remote-ssh
+code --install-extension ms-vscode-remote.remote-ssh-edit
+code --install-extension ms-vscode-remote.remote-ssh-explorer
+code --install-extension ms-vscode-remote.remote-wsl
+code --install-extension ms-vscode-remote.vscode-remote-extensionpack
+code --install-extension ms-vscode.azure-account
+code --install-extension ms-vscode.azurecli
+code --install-extension ms-vscode.powershell
+code --install-extension ms-vscode.vscode-node-azure-pack
+code --install-extension ms-vsliveshare.vsliveshare
+code --install-extension ms-vsonline.vsonline
+code --install-extension msazurermtools.azurerm-vscode-tools
 
 # --------------------------------------------------------------------------------------
 <# Ensure Windows Terminal (wt) and Visual Studio Code Teminal use the exact same PowerShell 7 profile.
@@ -312,61 +306,21 @@ explorer https://github.com/microsoft/cascadia-code/releases/download/v2111.01/C
 * Save the config file.
 #>
 
-# --------------------------------------------------------------------------------------
-<# Terminal icons
- # Terminal-Icons is a PowerShell module that adds file and folder icons
- # when displaying items in the terminal.
- # This relies on the custom fonts provided by Nerd Fonts.
-explorer https://github.com/devblackops/Terminal-Icons
+<# Configure terminal in VS Code to use the new font!
+
+* In VS Code click on the gear icon bottom left!
+* Choose settings!
+* Top right choose the file-looing icon to "Open Settings (JSON) - VS Code settings file.
+* Add the following and save - to set the right font and a good font size.
+
+"terminal.integrated.fontFamily": "CaskaydiaCove NF",
+"terminal.integrated.fontSize": 14
+
 #>
-Install-Module -Name Terminal-Icons -AllowClobber -Force
-notepad $profile # Open your profile file.
-# Insert the next line in your profile and save:
-Import-Module -Name Terminal-Icons
-. $profile # Reload your profile in the current session.
-Get-ChildItem # Check that the icons are working.
 
 # --------------------------------------------------------------------------------------
-<# Install oh-my-posh
- # oh-my-posh is a theme engine for your shell. It allows you to use
- # themes created by the community or create your own.
- # This relies on the custom fonts provided by Nerd Fonts.
-explorer https://ohmyposh.dev/docs/installation/windows
-#>
-# Either
-winget install JanDeDobbeleer.OhMyPosh --source winget
-<# Or download and install manually.
-Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
-#>
-
-# Restart terminal
-
-# Where is it oh-my-posh installed?
-(Get-Command oh-my-posh).Source
-
-# What shell am I running?
-oh-my-posh get shell # should be 'pwsh' for PowerShell 7.
-
-# Here is how to install a prompt theme. I show how to install my theme below.
-explorer https://ohmyposh.dev/docs/installation/prompt
-
-# Install my theme
-Copy-Item C:\code\I.CMD.you.to.develop.fast.in.Azure\oh-my-posh\noopman.omp.json (Get-Item $env:POSH_THEMES_PATH)
-
-# To set the noopman theme as your default:
-notepad $profile
-# Add this to the profile file and save
-oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\noopman.omp.json" | Invoke-Expression
-# Reload the profile in your terminal window
-. $profile
-
-# Alternatively you pick and potentially modify any existing theme you like:
-Get-Command -Module oh-my-posh-core # You find a Get-PoshThemes command.
-Get-PoshThemes
-# You can also browse themes here:
-explorer https://ohmyposh.dev/docs/themes
-
-<# Here are some other "good" vs code settings I use:
+<# While we are in the VS Code JSON config,
+   here some other "good" settings I enjoy:
 {
     "explorer.confirmDelete": false,
     "editor.formatOnPaste": true,
@@ -395,28 +349,111 @@ explorer https://ohmyposh.dev/docs/themes
 }
 #>
 
-<# VS Code in full code window.
+# --------------------------------------------------------------------------------------
+<# Terminal icons
+ # Terminal-Icons is a PowerShell module that adds file and folder icons
+ # when displaying items in the terminal.
+ # This relies on the custom fonts provided by Nerd Fonts.
+explorer https://github.com/devblackops/Terminal-Icons
+#>
+Install-Module -Name Terminal-Icons -AllowClobber -Force
 
-When you work in VS code use this shortcut to maximize the code window:
+notepad $profile # Open your profile file.
+# Insert the next line in your profile and save:
+Import-Module -Name Terminal-Icons
 
-ctrl+k, z
+. $profile # Reload your profile in the current session.
 
-Toggle ternimal with:
+# Check that the terminal icons are working.
+Get-ChildItem # this should show file and folder icons that look really nice and colourful!
 
-ctrl+j
+# --------------------------------------------------------------------------------------
+<# oh-my-posh
+ # oh-my-posh is a theme engine for your shell. It allows you to use
+ # themes created by the community or create your own.
+ # This relies on the custom fonts provided by Nerd Fonts.
+explorer https://ohmyposh.dev/docs/installation/windows
+#>
+# Either
+winget install JanDeDobbeleer.OhMyPosh --source winget
+<# Or download and install manually.
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
+#>
 
-Toggle file window with:
+# Restart terminal
 
-ctrl+b
+# Where is oh-my-posh installed?
+(Get-Command oh-my-posh).Source
 
-Open the command palette with:
+# What shell am I running?
+oh-my-posh get shell # should be 'pwsh' for PowerShell 7.
 
-ctrl+shift+p
+# Here is how to install a prompt theme. I show how to install my theme below.
+explorer https://ohmyposh.dev/docs/installation/prompt
+
+# Install my theme
+Copy-Item C:\code\I.CMD.you.to.develop.fast.in.Azure\oh-my-posh\noopman.omp.json (Get-Item $env:POSH_THEMES_PATH)
+
+# To set the noopman theme as your default:
+notepad $profile
+# Add this to the profile file and save
+oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\noopman.omp.json" | Invoke-Expression
+# Reload the profile in your terminal window
+. $profile
+
+# If (when) you don't lke my theme,
+# pick and potentially modify any existing theme you fancy:
+Get-Command -Module oh-my-posh-core # You find a Get-PoshThemes command.
+Get-PoshThemes # This will show you all available themes and what they look like using your current session.
+
+# You can also browse themes here:
+explorer https://ohmyposh.dev/docs/themes
+
+# --------------------------------------------------------------------------------------
+<# Finally a tip how to run VS Code in full code window mode:
+
+* In VS code while focused on a code file, use this shortcut to maximize the code window:
+
+ctrl + k, z # (hold crtl and press k. then release the keys and press z)
+
+* Toggle terminal window:
+
+ctrl + j
+
+* Toggle left windows:
+
+ctrl + b
+
+* Open file explorer window:
+
+ctrl + e
+
+* Open the command palette with:
+
+ctrl + shift + p
 
 #>
 
-######################
-# The repo where you can get it all! Please enjoy, reuse, and share! ;~)
+# --------------------------------------------------------------------------------------
+<# Azure PowerShell Az
+ # Az is the PowerShell module for Microsoft Azure.
+ # It provides cmdlets for managing resources in Azure.
+explorer https://learn.microsoft.com/en-us/powershell/azure/what-is-azure-powershell
+
+Note: I consider Az PowerShell one of my fundamental and most used tools.
+      Azure CLI is also great, and I use both equally.
+#>
+Install-Module -Name Az -Scope AllUsers -Repository PSGallery -Force
+
+# Now continue with the next step: Install Azure CLI and Azure PowerShell modules.
+code -r -g .\Noopman.Setup02.CMD.ps1:1
+
+###END####################
+return
+
+# The repo where you can get this script is here:
 explorer https://github.com/noopman/I.CMD.you.to.develop.fast.in.Azure
+
+# Please enjoy, reuse, and share! ; ~) Give credit to @noopman!
 
 # Thanks for reaching this far. I hope this is useful to you! /noopman
