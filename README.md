@@ -10,6 +10,8 @@ I divided the setup in three parts for logical reasons:
 2) [Command line environment](./Noopman.Setup02.CMD.ps1) for Azure scripting, development, and Infrastrucutre as Code (IaC).
 3) [Tools](./Noopman.Setup03.Tools.ps1) supporting work with scripting and development, such as Azure Storage Explorer, Azure Data Studio, etc.
 
+---
+
 4) [dotnet](./Noopman.Setup04.dotnet.(optional).ps1) I am including this rough draft of a donet and asp.net setup. It is not at as finished as the three steps for Azure yet.
 
 *Note: Because installing is a bit of a chicken and egg problem, I install my stuff in a my own specific order that makes sense chronologically. Basically this means Git and VS Code are installed very early on, when in truth they could have been installed last! One reason is that I execute my install normally from inside VS Code, so I install that "first".*
