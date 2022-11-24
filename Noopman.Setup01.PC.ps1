@@ -16,8 +16,6 @@ Get-Executionpolicy -List
 
 Set-Executionpolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine -Force # Admin required
 
-Set-Executionpolicy -ExecutionPolicy  -Scope LocalMachine -Force # Admin required
-
 Get-Executionpolicy -List # Now you can execute signed remote things!
 
 # --------------------------------------------------------------------------------------
@@ -61,14 +59,17 @@ wt # verify Windows Terminal is installed
   # cmdlets.
 
 # You can execute this line below to read about installing PowerShell 7, even if it is in a comment!
-#>
 explorer https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-windows
+#>
 
 $PSVersionTable # Check your PS version. Is it < 7?
 
 # These --override options do not seem to work on Winodws 10. Windows ® Installer. V 5.0.19041.2193.
 # Maybe it only works on Winodws 11?
 winget install --id Microsoft.Powershell --source winget --override '/SILENT /mergetasks="addopenherecontextmenus,addrunwithpowershell7contextmenu"'
+winget install --id Microsoft.Powershell --source winget
+
+
 # Note: the overrides '/SILENT /mergetasks="addopenherecontextmenus,addrunwithpowershell7contextmenu"'
 #       is convenient to add the "Open PowerShell 7 here" and "Run with PowerShell 7" context menu items.
 
@@ -83,6 +84,9 @@ exit # restart your terminal
 wt # start Windows Terminal
 
 $PSVersionTable # Check your PS version. This can be 5.1 or similar.
+
+# PowerShell installer adds to the PC environment settings.
+# For the next command to work you need to sign out and back into Windows.
 
 pwsh # Start PowerShell 7 in your terminal session.
 
@@ -109,6 +113,8 @@ with speed and efficiency.
 git --version # check if git is installed
 
 winget install Git.Git # install git
+
+# Again now you need to sign out and back in again!
 
 git --version # verify git is installed
 
@@ -179,6 +185,8 @@ Invoke-WebRequest -Uri 'https://code.visualstudio.com/sha/download?build=stable&
 c:\temp\vscode.exe # Run this!
 #>
 
+# Again now you need to sign out and back in again!
+
 code # verify VS Code is now installed!
 
 # --------------------------------------------------------------------------------------
@@ -230,6 +238,8 @@ Instead configure VS Code with this setting!
 Open the VS Code settings file and add the following:
 
 "powershell.integratedConsole.focusConsoleOnExecute": false,
+
+When tesing on Windows 10, I had to also exit Code and reopen it for the new setting to apply.
 
 Now execute the next line, or two lines if you like by selecting the text of the lines:
 #>
