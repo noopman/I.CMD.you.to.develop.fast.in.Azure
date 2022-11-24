@@ -7,8 +7,18 @@ and tools in yet another file.
 
 # --------------------------------------------------------------------------------------
 # Ensure you can install remote modules.
-Set-Executionpolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-Set-Executionpolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine # Admin required
+
+Get-Executionpolicy -List
+
+Set-Executionpolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+
+Get-Executionpolicy -List
+
+Set-Executionpolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine -Force # Admin required
+
+Set-Executionpolicy -ExecutionPolicy  -Scope LocalMachine -Force # Admin required
+
+Get-Executionpolicy -List # Now you can execute signed remote things!
 
 # --------------------------------------------------------------------------------------
 # Winget is a command-line package manager for Windows 10.
@@ -51,13 +61,22 @@ wt # verify Windows Terminal is installed
   # cmdlets.
 
 # You can execute this line below to read about installing PowerShell 7, even if it is in a comment!
-explorer https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-windows
 #>
+explorer https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-windows
 
+$PSVersionTable # Check your PS version. Is it < 7?
+
+# These --override options do not seem to work on Winodws 10. Windows ® Installer. V 5.0.19041.2193.
+# Maybe it only works on Winodws 11?
 winget install --id Microsoft.Powershell --source winget --override '/SILENT /mergetasks="addopenherecontextmenus,addrunwithpowershell7contextmenu"'
-
 # Note: the overrides '/SILENT /mergetasks="addopenherecontextmenus,addrunwithpowershell7contextmenu"'
 #       is convenient to add the "Open PowerShell 7 here" and "Run with PowerShell 7" context menu items.
+
+# This is a clean install where you won't get the options checked by the override.
+winget install --id Microsoft.Powershell --source winget
+
+# The other option is to browse to the site just above and download the MSI!
+# When you do you can check the right boxes during install yourself!
 
 exit # restart your terminal
 
@@ -77,6 +96,9 @@ $PSVersionTable # Now your PS version should be 7.3.0 or higher.
 * Default terminal application: Windows Terminal
 * Launch mode: I prefer maximized.
 * Save settings! (I often forget this step.)
+
+# --------------------------------------------------------------------------------------
+# Note: From now you always use wt and a PS7 session! Power Shell 5 is old news.
 
 # --------------------------------------------------------------------------------------
 <# Git
@@ -107,12 +129,17 @@ Set-Location $codeDir
 # PowerShell profile
 
 # Open or create a profile file for your custom settings.
+
+# On Windows 10 you need to first create the file:
+if (!(Test-Path -Path $profile)) { New-Item -ItemType File -Path $profile -Force }
+
 notepad $profile
 
-# Insert this in the file and save.
+# Insert the following two lines in the file and save.
+$codeDir = 'c:\code'
 Set-Location $codeDir
 
-# Reload your profile.
+# Reload your PS session profile.
 . $profile
 
 # Your command line will now always start in this location convenient location!

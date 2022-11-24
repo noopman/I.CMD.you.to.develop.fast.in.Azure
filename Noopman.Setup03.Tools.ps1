@@ -15,7 +15,6 @@ For starters type the command or copy paste each one.
 Install-Module -Name PowerShellCookbook -AllowClobber -Force
 Import-Module -Name PowerShellCookbook
 
-
 $someObject = Get-Item .
 
 # First to show what is not very useful.
@@ -82,8 +81,8 @@ AzCopy # Verify installation
  # A command-line interface
  # that you can use to develop and test Azure Functions locally.
 explorer https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local
-winget install Microsoft.AzureFunctionsCoreTools
 #>
+winget install Microsoft.AzureFunctionsCoreTools
 
 # ----------------------------------------------------------------------------------
 <# Azure Data Studio
@@ -92,16 +91,16 @@ winget install Microsoft.AzureFunctionsCoreTools
  # and cloud-based data platforms.
 explorer https://learn.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio
 # optional install in case you need it
-winget install Microsoft.AzureDataStudio
 #>
+winget install Microsoft.AzureDataStudio
 
 # ----------------------------------------------------------------------------------
 <# Azure Cosmos DB Emulator
  # A local version of Azure Cosmos DB
 explorer https://learn.microsoft.com/en-us/azure/cosmos-db/local-emulator
 # optional install in case you need it
-winget install Microsoft.AzureCosmosEmulator
 #>
+winget install Microsoft.AzureCosmosEmulator
 
 # ----------------------------------------------------------------------------------
 <# Microsoft Azure IoT Explorer
@@ -109,8 +108,8 @@ winget install Microsoft.AzureCosmosEmulator
  # interact with your IoT Hub and devices.
 explorer https://learn.microsoft.com/en-us/azure/iot-fundamentals/howto-use-iot-explorer
 # optional install in case you need it
-winget install Microsoft.azure-iot-explorer
 #>
+winget install Microsoft.azure-iot-explorer
 
 ###END####################
 return

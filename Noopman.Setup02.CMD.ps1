@@ -39,8 +39,9 @@ winget install --exact --id Microsoft.AzureCLI
 
 
 
-az # verify az is installed
-az version
+az version # verify az is installed
+
+az
 
 
 
@@ -77,9 +78,11 @@ explorer https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/i
 # Installed above:
 # 1) Azure CLI
 
-# Installed in https://raw.githubusercontent.com/noopman/I.CMD.you.to.develop.fast.in.Azure/main/Noopman.Tools.Setup.ps1
+# Installed in Noopman.Tools.Setup.ps1
 # 2) Git
 # 3) GitHub CLI
+
+
 # 4) Npm
 
 # Review the following repo for all instructions:
