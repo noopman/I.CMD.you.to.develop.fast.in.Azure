@@ -143,6 +143,30 @@ npm -v
 # nodist (or chocolatey), then you can get the latest version from here:
 # https://nodejs.org/en/download/
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # --------------------------------------------------------------------------------------
 <# There! Strange prerequisites, but now we have npm installed.
 
@@ -153,7 +177,33 @@ gh --version
 node -v # The must be 16.0.0. or higher to work with azd
 npm -v
 
-# If all above are installed - the commands run - then you're good to go with azd (preview)!
+# If all above are installed - the commands run - 
+# then you're good to go with azd (preview)!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -166,15 +216,17 @@ npm -v
 
 
 # --------------------------------------------------------------------------------------
-<# Install azd
-# Azure Developer Cli (preview)
+<# azd (preview)
+* Note: Yes, the preview downloads a powershell script and runs it.
 #>
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 
-# * Note: Yes, the preview downloads a powershell script and runs it.
 
 azd # verify azd is installed
 azd version
+
+# VS Code has a preview extension for azd:
+code --install-extension ms-azuretools.azure-dev
 
 # Read how to get started with azd
 explorer https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/get-started
@@ -213,12 +265,34 @@ explorer https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/g
 
 
 
+
+
+
+
 # Create a place to work.
-$path = 'c:\code\azd.test'
+$path = "c:\code\azd.test\$([System.IO.Path]::GetRandomFileName())"
 Remove-Item -Force -Recurse $path -ea 0
 New-Item -ItemType Directory $path
 Set-Location $path
-(Get-Location).Path
+code .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -237,8 +311,24 @@ Set-Location $path
 
 # The available preview templates are:
 azd template list
+
 # The template list is sourced from the Azure Samples GitHub repo
 explorer https://github.com/orgs/Azure-Samples/repositories
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -318,6 +408,56 @@ azd down
 
 
 
+<# Visual Studio Code Dev Containers
+ # Visual Studio Code Dev Containers is a feature of Visual Studio Code
+ # that allows you to use a Docker container as a full-featured
+ # development environment.
+
+explorer https://code.visualstudio.com/docs/devcontainers/containers
+
+* python --version
+* Docker Desktop
+#>
+
+<#
+
+Instead you can use an Visual Studio Code Dev Container:
+explorer https://code.visualstudio.com/docs/devcontainers/containers
+
+python --version
+#>
+
+winget install --exact --id Python.Python.3.9
+
+python --version
+
+winget install --exact --id Docker.DockerDesktop
+
+<# To launch a dev container for the code.
+* Now open the folder in VS Code
+* Hit F1 and choose: Remote-Containers: Rebuild and Reopen in Container
+#>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -345,15 +485,11 @@ azd down # Takes your infrastructure down from Azure.
 
 
 
-# Now continue with the next and final step: tools supporting development and scripting
-code -r -g .\Noopman.Setup03.Tools.ps1:1
 
-###END####################
-return
+return ###END####################
 
 # The repo where you can get this script is here:
 explorer https://github.com/noopman/I.CMD.you.to.develop.fast.in.Azure
 
 # Please enjoy, reuse, and share! ; ~) Give credit to @noopman!
-
 # Thanks for reaching this far. I hope this is useful to you! /noopman
