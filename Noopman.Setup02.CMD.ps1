@@ -440,29 +440,46 @@ azd down
 
 explorer https://code.visualstudio.com/docs/devcontainers/containers
 
-* python --version
+* Python
 * Docker Desktop
 #>
 
-<#
-
-Instead you can use an Visual Studio Code Dev Container:
-explorer https://code.visualstudio.com/docs/devcontainers/containers
-
-python --version
-#>
-
 winget install --exact --id Python.Python.3.9
-
 python --version
 
 winget install --exact --id Docker.DockerDesktop
+docker version
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Initiate the setup of using dev containers for the sample
+azd init --template todo-csharp-cosmos-sql
 
 <# To launch a dev container for the code.
 * Now open the folder in VS Code
 * Hit F1 and choose: Remote-Containers: Rebuild and Reopen in Container
 #>
 
+azd up
 
 
 
