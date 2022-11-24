@@ -67,8 +67,6 @@ $PSVersionTable # Check your PS version. Is it < 7?
 # These --override options do not seem to work on Winodws 10. Windows ® Installer. V 5.0.19041.2193.
 # Maybe it only works on Winodws 11?
 winget install --id Microsoft.Powershell --source winget --override '/SILENT /mergetasks="addopenherecontextmenus,addrunwithpowershell7contextmenu"'
-winget install --id Microsoft.Powershell --source winget
-
 
 # Note: the overrides '/SILENT /mergetasks="addopenherecontextmenus,addrunwithpowershell7contextmenu"'
 #       is convenient to add the "Open PowerShell 7 here" and "Run with PowerShell 7" context menu items.
@@ -189,6 +187,9 @@ c:\temp\vscode.exe # Run this!
 
 code # verify VS Code is now installed!
 
+# Add an extension to VS Code for PowerShell (more exetensions later):
+code --install-extension ms-vscode.powershell
+
 # --------------------------------------------------------------------------------------
 <# Clone these scripts from GitHub!
 
@@ -206,7 +207,7 @@ Set-Location "$codeDir\$repoName"
 # Open the folder in VS Code...
 code -n .
 # And then open this file to the right line:
-code -r -g .\Noopman.Setup01.PC.ps1:176
+code -r -g .\Noopman.Setup01.PC.ps1:212
 
 # Let's continue here! ;~)
 
@@ -256,26 +257,26 @@ install them from the Extensions tab in Visual Studio Code.
 # You can read about all extensions here:
 explorer https://marketplace.visualstudio.com/VSCode
 
-code --install-extension AzurePolicy.azurepolicyextension
-code --install-extension ms-azuretools.vscode-azureresourcegroups
-code --install-extension ms-azuretools.vscode-azurestorage
-code --install-extension ms-azuretools.vscode-azurevirtualmachines
-code --install-extension ms-azuretools.vscode-bicep
-code --install-extension ms-azuretools.vscode-docker
-code --install-extension ms-dotnettools.vscode-dotnet-runtime
-code --install-extension ms-vscode-remote.remote-containers
-code --install-extension ms-vscode-remote.remote-ssh
-code --install-extension ms-vscode-remote.remote-ssh-edit
-code --install-extension ms-vscode-remote.remote-ssh-explorer
-code --install-extension ms-vscode-remote.remote-wsl
-code --install-extension ms-vscode-remote.vscode-remote-extensionpack
-code --install-extension ms-vscode.azure-account
-code --install-extension ms-vscode.azurecli
-code --install-extension ms-vscode.powershell
-code --install-extension ms-vscode.vscode-node-azure-pack
-code --install-extension ms-vsliveshare.vsliveshare
-code --install-extension ms-vsonline.vsonline
-code --install-extension msazurermtools.azurerm-vscode-tools
+code --install-extension AzurePolicy.azurepolicyextension --force
+code --install-extension ms-azuretools.vscode-azureresourcegroups --force
+code --install-extension ms-azuretools.vscode-azurestorage --force
+code --install-extension ms-azuretools.vscode-azurevirtualmachines --force
+code --install-extension ms-azuretools.vscode-bicep --force
+code --install-extension ms-azuretools.vscode-docker --force
+code --install-extension ms-dotnettools.vscode-dotnet-runtime --force
+code --install-extension ms-vscode-remote.remote-containers --force
+code --install-extension ms-vscode-remote.remote-ssh --force
+code --install-extension ms-vscode-remote.remote-ssh-edit --force
+code --install-extension ms-vscode-remote.remote-ssh-explorer --force
+code --install-extension ms-vscode-remote.remote-wsl --force
+code --install-extension ms-vscode-remote.vscode-remote-extensionpack --force
+code --install-extension ms-vscode.azure-account --force
+code --install-extension ms-vscode.azurecli --force
+code --install-extension ms-vscode.vscode-node-azure-pack --force
+code --install-extension ms-vsliveshare.vsliveshare --force
+code --install-extension ms-vsonline.vsonline --force
+code --install-extension msazurermtools.azurerm-vscode-tools --force
+# code --install-extension ms-vscode.powershell # Already installed above.
 
 # --------------------------------------------------------------------------------------
 <# Ensure Windows Terminal (wt) and Visual Studio Code Teminal use the exact same PowerShell 7 profile.

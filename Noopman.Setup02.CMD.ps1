@@ -73,15 +73,13 @@ explorer https://devblogs.microsoft.com/azure-sdk/azure-developer-cli-azd-octobe
 # To Install review this (steps below):
 explorer https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd
 
-# Three (3) Requirements for azd
+# The Requirements for azd
 
 # Installed above:
 # 1) Azure CLI
 
-# Installed in Noopman.Tools.Setup.ps1
 # 2) Git
 # 3) GitHub CLI
-
 
 # 4) Npm
 
@@ -120,7 +118,8 @@ We want to have NPM installed.
 Fortunately, installing nodist also installs node and npm!
 #>
 
-# Install chocolatey - using the community ps1 script
+# Install chocolatey - using the community ps1 script.
+# Uses https://community.chocolatey.org/install.ps1
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
 # Install nodist - using chocolatey
@@ -222,14 +221,19 @@ npm -v
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 
 
-azd # verify azd is installed
-azd version
+azd version # verify azd is installed
+
+azd
 
 # VS Code has a preview extension for azd:
-code --install-extension ms-azuretools.azure-dev
+code --install-extension ms-azuretools.azure-dev --force
 
-# Read how to get started with azd
+
+
+# Read how to get started with azd, but I'll show you below! ;)
 explorer https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/get-started
+
+
 
 
 
@@ -348,8 +352,8 @@ explorer https://github.com/orgs/Azure-Samples/repositories
 # An exaple template to try:
 explorer https://github.com/Azure-Samples/todo-csharp-cosmos-sql
 
-# Deploy this template to azure - ONE LINE
-# This is the *MAGIC*!
+# Deploy this template to azure - ONE LINE!
+# (This is the *MAGIC*!)
 
 azd up --template todo-csharp-cosmos-sql
 
@@ -371,6 +375,8 @@ azd up --template todo-csharp-cosmos-sql
 
 
 
+# This will take a few minutes to deploy. So... here's one I prepared earlier:
+explorer .\runningazdev.png
 
 
 
@@ -391,7 +397,26 @@ azd up --template todo-csharp-cosmos-sql
 
 
 
-# Remove the resources created by azd up - ONE LINE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Remove the resources created by azd up - ONE LINE!
 azd down
 
 
