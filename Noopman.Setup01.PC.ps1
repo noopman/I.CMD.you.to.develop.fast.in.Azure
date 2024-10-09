@@ -125,7 +125,7 @@ explorer https://git-scm.com/download/win
 
 # --------------------------------------------------------------------------------------
 # Set up a location for where you always keep code (IaC or otherwise).
-$codeDir = 'c:\code'
+$codeDir = 'D:\'
 New-Item -ItemType Directory -Path $codeDir
 Set-Location $codeDir
 
@@ -140,7 +140,7 @@ if (!(Test-Path -Path $profile)) { New-Item -ItemType File -Path $profile -Force
 notepad $profile
 
 # Insert the following two lines in the file and save.
-$codeDir = 'c:\code'
+$codeDir = 'D:\'
 Set-Location $codeDir
 
 # Reload your PS session profile.
@@ -289,7 +289,7 @@ code # Start Visual Studio Code
 $profile # run on the pwsh command line in VS Code.
 # Are the two terminal instances using the same profile?
 
-# Note: now you are in VS Code and you can execute 
+# Note: now you are in VS Code and you can execute
 
 # --------------------------------------------------------------------------------------
 <# PSReadLine
@@ -321,7 +321,7 @@ explorer https://github.com/microsoft/cascadia-code/releases/download/v2111.01/C
 # Install the fonts in the ttf folder on the computer (I don't install all fonts in the "static" folder).
 
 # --------------------------------------------------------------------------------------
-# Configure WT to use the new font: Two options! 
+# Configure WT to use the new font: Two options!
 <# Option 1: Graphically
 
 * Go to: WT > Settings > Profiles > Default > Font
@@ -430,7 +430,7 @@ oh-my-posh get shell # should be 'pwsh' for PowerShell 7.
 explorer https://ohmyposh.dev/docs/installation/prompt
 
 # Install my theme
-Copy-Item C:\code\I.CMD.you.to.develop.fast.in.Azure\oh-my-posh\noopman.omp.json (Get-Item $env:POSH_THEMES_PATH)
+Copy-Item D:\I.CMD.you.to.develop.fast.in.Azure\oh-my-posh\noopman.omp.json (Get-Item $env:POSH_THEMES_PATH)
 
 # To set the noopman theme as your default:
 notepad $profile

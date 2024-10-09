@@ -176,7 +176,7 @@ gh --version
 node -v # The must be 16.0.0. or higher to work with azd
 npm -v
 
-# If all above are installed - the commands run - 
+# If all above are installed - the commands run -
 # then you're good to go with azd (preview)!
 
 
@@ -274,7 +274,7 @@ explorer https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/g
 
 
 # Create a place to work.
-$path = "c:\code\azd.test\$([System.IO.Path]::GetRandomFileName())"
+$path = "D:\azd.test\$([System.IO.Path]::GetRandomFileName())"
 Remove-Item -Force -Recurse $path -ea 0
 New-Item -ItemType Directory $path
 Set-Location $path
